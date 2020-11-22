@@ -20,7 +20,7 @@ window.onload = () => {
 
     console.log('cargando script');
     loadButtons();
-    //borrar();
+
 
 }
 
@@ -29,11 +29,11 @@ function loadButtons() {
     for (let b of buttons) {
         let button = document.querySelector('#' + b);
         button.addEventListener('click', () => {
-            
+
             console.log(`mostrar ${b}`)
             listar(b);
             borrar();
-          
+
 
         })
     }
@@ -64,9 +64,8 @@ function listar(lista) {
                         response.status);
                     return;
                 }
-                // Examine the text in the response
+                // respuesta peticion
                 response.json().then(function (data) {
-                    //console.log(data);
                     muestraDatos(data, lista);
                 });
             }
@@ -88,21 +87,16 @@ function muestraDatos(data, lista) {
         console.log('-------------------');
     });*/
     console.log(data)
-
-
-
     let listView = document.createElement('ol');
     for (var i = 0; i < data.length; i++) {
         let listViewItem = document.createElement('li');
         if (lista == 'usuarios') {
-
             listViewItem.appendChild(document.createTextNode(
                 'id: ' + data[i]['id'] + ' usuario:' + data[i]['nombre']))
 
         }
         else if (lista == "comentarios") {
             listViewItem.appendChild(document.createTextNode(
-
                 data[i]['fecha'] + ' ' +
                 data[i]['titulo'] + ' ' +
                 data[i]['comentario']
@@ -184,8 +178,6 @@ function muestraDatos(data, lista) {
 
         }
         else if (lista == "tipos") {
-
-
             listViewItem.appendChild(document.createTextNode(
                 'id: ' + data[i]['id'] + ' ' +
                 'nombre: ' + data[i]['nombre'] + ' ' +
@@ -212,27 +204,14 @@ function muestraDatos(data, lista) {
 
     }
 
-
-
     document.querySelector('#lista').appendChild(listView)
-
 
 }
 
 function borrar() {
 
     console.clear();
-        console.log('borrado completado ');
-        
-        document.querySelector('div > ol').remove();
-    /*let borrarLista = document.querySelector('#borrar');
-    borrarLista.addEventListener('click', () => {
-
-        console.clear();
-        console.log('borrado completado ');
-        document.querySelector('div > ol').remove();
-
-
-    })*/
+    console.log('borrado completado ');
+    document.querySelector('div > ol').remove();
 
 }

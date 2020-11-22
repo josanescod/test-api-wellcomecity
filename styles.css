@@ -1,34 +1,30 @@
-h3{
+h3 {
     text-align: center;
 }
 
-#menu{
-
+#menu {
     background-color: #8f9491;
     text-align: center;
     margin-left: 5%;
     margin-right: 5%;
-    padding-top:2px;
-    padding-bottom:2px;
-    
-
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 button {
-    
-    margin-top:2px;
-    margin-bottom:2px;
-    font-size:16px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 16px;
 }
 
 #borrar {
     background-color: #EC524B;
-    color:white;
+    color: white;
 }
 
-#usuarios,#comentarios,#emails,#experiencias,#fotos,#hoteles,#ofertas,#perfiles,#roles,#servicios,#tipos {
-    background-color:#0d1f22;
-    color:white;
+#usuarios, #comentarios, #emails, #experiencias, #fotos, #hoteles, #ofertas, #perfiles, #roles, #servicios, #tipos {
+    background-color: #0d1f22;
+    color: white;
 }
 
 #lista {
@@ -36,15 +32,11 @@ button {
     text-align: left;
     margin-left: 5%;
     margin-right: 5%;
-    margin-top:5px;
-    margin-bottom:5px;
-    
-    
-    
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 ol {
-    padding-top:5px;
-    padding-bottom:5px;
-
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
