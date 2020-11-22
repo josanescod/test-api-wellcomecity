@@ -1,18 +1,4 @@
-/*
-GET https://welcomcity.herokuapp.com/test/usuarios -> Listado de todos los usuarios
-GET https://welcomcity.herokuapp.com/test/comentarios -> Listado de todos los comentarios
-GET https://welcomcity.herokuapp.com/test/emails -> Listado de todos los emails
-GET https://welcomcity.herokuapp.com/test/experiencias -> Listado de todos los experiencias
-GET https://welcomcity.herokuapp.com/test/fotos -> Listado de todos los fotos
-GET https://welcomcity.herokuapp.com/test/hoteles -> Listado de todos los hoteles
-GET https://welcomcity.herokuapp.com/test/ofertas -> Listado de todos los ofertas
-GET https://welcomcity.herokuapp.com/test/perfiles -> Listado de todos los perfiles
-GET https://welcomcity.herokuapp.com/test/roles -> Listado de todos los roles
-GET https://welcomcity.herokuapp.com/test/servicios -> Listado de todos los servicios
-GET https://welcomcity.herokuapp.com/test/tipos -> Listado de todos los tipos
 
-
-*/
 const buttons = ['usuarios', 'comentarios', 'emails', 'experiencias', 'fotos', 'hoteles', 'ofertas', 'perfiles',
     'roles', 'servicios', 'tipos'];
 
@@ -20,8 +6,6 @@ window.onload = () => {
 
     console.log('cargando script');
     loadButtons();
-
-
 }
 
 function loadButtons() {
@@ -76,7 +60,6 @@ function listar(lista) {
 
 
 }
-
 
 function muestraDatos(data, lista) {
     console.log('has seleccionado la lista: ' + lista)
@@ -192,9 +175,6 @@ function muestraDatos(data, lista) {
                     ' id: ' + perfiles[j]['id'] + ' ' + 'nombre: ' + perfiles[j]['nombre'] + ''
                 ))
             }
-
-
-
         }
         else {
             console.log('listado no disponible')
