@@ -4,7 +4,7 @@ h3{
 
 #menu{
 
-    background-color: #F5B461;
+    background-color: #8f9491;
     text-align: center;
     margin-left: 5%;
     margin-right: 5%;
@@ -27,5 +27,24 @@ button {
 }
 
 #usuarios,#comentarios,#emails,#experiencias,#fotos,#hoteles,#ofertas,#perfiles,#roles,#servicios,#tipos {
-    background-color:#F3EAC2;
+    background-color:#0d1f22;
+    color:white;
+}
+
+#lista {
+    background-color: #f3eaf4;
+    text-align: left;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top:5px;
+    margin-bottom:5px;
+    
+    
+    
+}
+
+ol {
+    padding-top:5px;
+    padding-bottom:5px;
+
 }

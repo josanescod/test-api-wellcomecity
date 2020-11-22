@@ -180,7 +180,7 @@ function muestraDatos(data,lista) {
             'id: '+data[i]['id']+' '+            
             'nombre: '+data[i]['nombre']+' '+
             'perfiles: '
-            //`perfil${j}:`+ data[i]['perfiles'][j]['id']        
+                    
             ))
            
             let perfiles = data[i]['perfiles']
@@ -202,7 +202,9 @@ function muestraDatos(data,lista) {
         //console.log(data[i]['id']+':'+data[i]['nombre'])
     }
 
-    document.querySelector('#lista').appendChild(listView);
+   
+
+    document.querySelector('#lista').appendChild(listView)
     //let newDIv = document.createElement('div');
 
 
