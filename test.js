@@ -13,34 +13,39 @@ GET https://welcomcity.herokuapp.com/test/tipos -> Listado de todos los tipos
 
 
 */
-
+const buttons= ['usuarios','comentarios','emails','experiencias','fotos','hoteles','ofertas','perfiles',
+'roles','servicios','tipos'];
 
 window.onload = () => {
 
     console.log('cargando script');
-
-    listarUsuarios();
-    listarComentarios();
+    loadButtons();
     borrar();
 
 }
 
+function loadButtons(){
+    for (let b of buttons){
+        let button = document.querySelector('#'+b);
+        button.addEventListener('click', () => {
+            console.log(`mostrar ${b}`)
+            listar(b);
+    
+    })
+    }
+}
 
-function listarUsuarios() {
+function listar(lista) {
 
-    let usuarios = document.querySelector('#usuarios');
+    /*let usuarios = document.querySelector('#usuarios');
     usuarios.addEventListener('click', () => {
-        console.log('mostrar usuarios')
+        console.log('mostrar usuarios')*/
 
-        let url = 'https://cors-anywhere.herokuapp.com/https://welcomcity.herokuapp.com/test/usuarios'
+        let url = `https://cors-anywhere.herokuapp.com/https://welcomcity.herokuapp.com/test/${lista}`
         let request = new Request(url, {
             method: 'GET',
-
-
-
-        });
-
-        //llamada a la api para devolver los usuarios
+        })
+   //llamada a la api para devolver los usuarios
         fetch(request)
             .then(
                 function (response) {
@@ -52,14 +57,14 @@ function listarUsuarios() {
                     // Examine the text in the response
                     response.json().then(function (data) {
                         console.log(data);
-                        muestraDatos(data);
+                        muestraDatos(data,lista);
                     });
                 }
             )
             .catch(function (err) {
                 console.log('Fetch Error :-S', err);
             });
-    })
+    
 
 }
 
@@ -101,15 +106,15 @@ function listarComentarios() {
 }
 
 
-function muestraDatos(data) {
-
-    /*data.forEach(obj => {
+function muestraDatos(data,lista) {
+    console.log('has seleccionado la lista: '+lista)
+    data.forEach(obj => {
         Object.entries(obj).forEach(([key, value]) => {
             console.log(`${key} ${value}`);
         });
         console.log('-------------------');
-    });*/
-    let listView = document.createElement('ol');
+    });
+    /*let listView = document.createElement('ol');
     for (var i = 0; i < data.length; i++) {
         let listViewItem = document.createElement('li');
         listViewItem.appendChild(document.createTextNode(data[i]['id'] + ':' + data[i]['nombre']))
@@ -117,19 +122,22 @@ function muestraDatos(data) {
         //console.log(data[i]['id']+':'+data[i]['nombre'])
     }
 
-    document.querySelector('#lista').appendChild(listView);
+    document.querySelector('#lista').appendChild(listView);*/
     //let newDIv = document.createElement('div');
 
 
 }
 
 function borrar() {
+    
     let borrarLista = document.querySelector('#borrar');
     borrarLista.addEventListener('click', () => {
-        //console.log('borrando usuarios');
-        document.querySelector('div > ol').remove();
-        //console.log(listado)
+        
+        console.clear();
+        console.log('borrado completado ');
+       // document.querySelector('div > ol').remove();
+        
 
-    }
-    )
+    })
+    
 }
