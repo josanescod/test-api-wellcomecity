@@ -23,30 +23,30 @@ function loadButtons() {
     //boton de borrar
     let borrarLista = document.querySelector('#borrar');
     borrarLista.addEventListener('click', () => {
-    borrar();
+        borrar();
     })
     //selector experiencias
     let selectexp = document.querySelector('#selectexp');
     //primero una peticion a experiencias para cargar el selector con los datos
     listar('experiencias', load);
     //crear el evento change 
-        selectexp.addEventListener('change', () => {
+    selectexp.addEventListener('change', () => {
         let svalue = selectexp.value;
         console.log(`mostrar experiencia ${svalue}`)
-        listar('experiencias', show,svalue);//la funcion listado para aprovecharla crear otro parametro 'load/show'
+        listar('experiencias', show, svalue);
         borrar()
     })
-    
+
 }
 
 function listar(lista, action, param = 0) {
     if (param == 0) {
         var url = `https://cors-anywhere.herokuapp.com/https://welcomcity.herokuapp.com/test/${lista}`
         console.log(url)
-    }else{
+    } else {
         var url = `https://cors-anywhere.herokuapp.com/https://welcomcity.herokuapp.com/test/${lista}/${param}`
         console.log(url)
-    }   
+    }
     let request = new Request(url, {
         method: 'GET',
     })
@@ -86,134 +86,143 @@ function muestraDatos(data, lista, param = 0) {
         console.log('-------------------');
     });*/
     console.log(data)
-    if (param!=0){ 
-      
-        muestraDatosParametro(data,lista);
+    if (param != 0) {
 
-    }else {      
-    let listView = document.createElement('ol');
-    listView.setAttribute('id','orderedList');
-    for (d in data) {
-        let listViewItem = document.createElement('li');
-        if (lista == 'usuarios') {
-            listViewItem.appendChild(document.createTextNode(
-                'id: ' + data[d]['id'] + ' usuario:' + data[d]['nombre']))
+        muestraDatosParametro(data, lista);
 
-        }
-        else if (lista == "comentarios") {
-            listViewItem.appendChild(document.createTextNode(
-                data[d]['fecha'] + ' ' +
-                data[d]['titulo'] + ' ' +
-                data[d]['comentario']
-            ))
-        }
-        else if (lista == "emails") {
-            listViewItem.appendChild(document.createTextNode(
-                'id: ' + data[d]['id'] + ' ' +
-                'nombre: ' + data[d]['nombre'] + ' ' +
-                'direccion: ' + data[d]['direccion'] + ' ' +
-                'telefono: ' + data[d]['telefono'] + ' ' +
-                'mensaje: ' + data[d]['mensaje']
-            ))
-        }
-        else if (lista == "experiencias") {
-            console.log(listViewItem);
-            listViewItem.appendChild(document.createTextNode(
-                
-                'nombre: ' + data[d]['nombre'] + ' ' +
-                'descripcion: ' + data[d]['descripcion'] + ' ' +
-                'puntuacion: ' + data[d]['puntuacion'] + ' ' +
-                'precio: ' + data[d]['precio']
-            ))
-            console.log(listViewItem);
-
-        }
-        else if (lista == "fotos") {
-            listViewItem.appendChild(document.createTextNode(
-                'id: ' + data[d]['id'] + ' ' +
-                'nombre: ' + data[d]['nombre']
-
-            ))
-
-        }
-        else if (lista == "hoteles") {
-            listViewItem.appendChild(document.createTextNode(
-                'id: ' + data[d]['id'] + ' ' +
-                'nombre: ' + data[d]['nombre'] + ' ' +
-                'direccion: ' + data[d]['direccion']
-            ))
-        }
-        else if (lista == "ofertas") {
-            listViewItem.appendChild(document.createTextNode(
-                'id: ' + data[d]['id'] + ' ' +
-                'codigo: ' + data[d]['codigo'] + ' ' +
-                'nombre: ' + data[d]['nombre'] + ' ' +
-                'descripcion: ' + data[d]['descripcion']
-            ))
-        }
-        else if (lista == "perfiles") {
-            listViewItem.appendChild(document.createTextNode(
-                'id: ' + data[d]['id'] + ' ' +
-                'nombre: ' + data[d]['nombre']
-            ))
-        }
-        else if (lista == "roles") {
-            listViewItem.appendChild(document.createTextNode(
-                'id: ' + data[d]['id'] + ' ' +
-                'nombre: ' + data[d]['nombre']
-            ))
-        }
-        else if (lista == "servicios") {
-            listViewItem.appendChild(document.createTextNode(
-                'id: ' + data[d]['id'] + ' ' +
-                'nombre: ' + data[d]['nombre'] + ' ' +
-                'descripcion: ' + data[d]['descripcion'] + ' ' +
-                'precio: ' + data[d]['precio']
-            ))
-        }
-        else if (lista == "tipos") {
-            listViewItem.appendChild(document.createTextNode(
-                'id: ' + data[d]['id'] + ' ' +
-                'nombre: ' + data[d]['nombre'] + ' ' +
-                'perfiles: '
-            ))
-            /*let perfiles = data[d]['perfiles']
-            for (var j = 0; j < perfiles.length; j++) {
-                console.log('id: ' + perfiles[j]['id'] + ' ' + 'nombre: ' + perfiles[j]['nombre'])
+    } else {
+        let listView = document.createElement('ol');
+        listView.setAttribute('id', 'orderedList');
+        for (d in data) {
+            let listViewItem = document.createElement('li');
+            if (lista == 'usuarios') {
                 listViewItem.appendChild(document.createTextNode(
-                    ' id: ' + perfiles[j]['id'] + ' ' + 'nombre: ' + perfiles[j]['nombre'] + ''
+                    'id: ' + data[d]['id'] + ' usuario:' + data[d]['nombre']))
+
+            }
+            else if (lista == "comentarios") {
+                listViewItem.appendChild(document.createTextNode(
+                    data[d]['fecha'] + ' ' +
+                    data[d]['titulo'] + ' ' +
+                    data[d]['comentario']
                 ))
-            }*/
+            }
+            else if (lista == "emails") {
+                listViewItem.appendChild(document.createTextNode(
+                    'id: ' + data[d]['id'] + ' ' +
+                    'nombre: ' + data[d]['nombre'] + ' ' +
+                    'direccion: ' + data[d]['direccion'] + ' ' +
+                    'telefono: ' + data[d]['telefono'] + ' ' +
+                    'mensaje: ' + data[d]['mensaje']
+                ))
+            }
+            else if (lista == "experiencias") {
+                console.log(listViewItem);
+                listViewItem.appendChild(document.createTextNode(
+
+                    'nombre: ' + data[d]['nombre'] + ' ' +
+                    'descripcion: ' + data[d]['descripcion'] + ' ' +
+                    'puntuacion: ' + data[d]['puntuacion'] + ' ' +
+                    'precio: ' + data[d]['precio']
+                ))
+                console.log(listViewItem);
+
+            }
+            else if (lista == "fotos") {
+                listViewItem.appendChild(document.createTextNode(
+                    'id: ' + data[d]['id'] + ' ' +
+                    'nombre: ' + data[d]['nombre']
+
+                ))
+
+            }
+            else if (lista == "hoteles") {
+                listViewItem.appendChild(document.createTextNode(
+                    'id: ' + data[d]['id'] + ' ' +
+                    'nombre: ' + data[d]['nombre'] + ' ' +
+                    'direccion: ' + data[d]['direccion']
+                ))
+            }
+            else if (lista == "ofertas") {
+                listViewItem.appendChild(document.createTextNode(
+                    'id: ' + data[d]['id'] + ' ' +
+                    'codigo: ' + data[d]['codigo'] + ' ' +
+                    'nombre: ' + data[d]['nombre'] + ' ' +
+                    'descripcion: ' + data[d]['descripcion']
+                ))
+            }
+            else if (lista == "perfiles") {
+                listViewItem.appendChild(document.createTextNode(
+                    'id: ' + data[d]['id'] + ' ' +
+                    'nombre: ' + data[d]['nombre']
+                ))
+            }
+            else if (lista == "roles") {
+                listViewItem.appendChild(document.createTextNode(
+                    'id: ' + data[d]['id'] + ' ' +
+                    'nombre: ' + data[d]['nombre']
+                ))
+            }
+            else if (lista == "servicios") {
+                listViewItem.appendChild(document.createTextNode(
+                    'id: ' + data[d]['id'] + ' ' +
+                    'nombre: ' + data[d]['nombre'] + ' ' +
+                    'descripcion: ' + data[d]['descripcion'] + ' ' +
+                    'precio: ' + data[d]['precio']
+                ))
+            }
+            else if (lista == "tipos") {
+                listViewItem.appendChild(document.createTextNode(
+                    'id: ' + data[d]['id'] + ' ' +
+                    'nombre: ' + data[d]['nombre'] + ' ' +
+                    'perfiles: '
+                ))
+                /*let perfiles = data[d]['perfiles']
+                for (var j = 0; j < perfiles.length; j++) {
+                    console.log('id: ' + perfiles[j]['id'] + ' ' + 'nombre: ' + perfiles[j]['nombre'])
+                    listViewItem.appendChild(document.createTextNode(
+                        ' id: ' + perfiles[j]['id'] + ' ' + 'nombre: ' + perfiles[j]['nombre'] + ''
+                    ))
+                }*/
+            }
+            else {
+                console.log('listado no disponible')
+            }
+            listView.appendChild(listViewItem)
         }
-        else {
-            console.log('listado no disponible')
-        }
-        listView.appendChild(listViewItem)
-    }
-    document.querySelector('#lista').appendChild(listView)
+        document.querySelector('#lista').appendChild(listView)
     }
 }
 
-function muestraDatosParametro(data,lista) {
+function muestraDatosParametro(data, lista) {
     if (lista == "experiencias") {
-            let listView = document.createElement('ol');
-            listView.setAttribute('id','orderedList');
-            let listonlyItem = document.createElement('li');          
-            listonlyItem.appendChild(document.createTextNode(
-                'id: ' + data['id'] + ' ' +
-                'nombre: ' + data['nombre'] + ' ' +
-                'descripcion: ' + data['descripcion'] + ' ' +
-                'puntuacion: ' + data['puntuacion'] + ' ' +
-                'precio: ' + data['precio']
-            ))
-            listView.appendChild(listonlyItem)
-            document.querySelector('#lista').appendChild(listView)                        
-            
-            }
+        let listView = document.createElement('ol');
+        listView.setAttribute('id', 'orderedList');
+        let listonlyItem = document.createElement('li');
+        listonlyItem.appendChild(document.createTextNode(
+            'id: ' + data['id'] + ' ' +
+            'nombre: ' + data['nombre'] + ' ' +
+            'descripcion: ' + data['descripcion'] + ' ' +
+            'puntuacion: ' + data['puntuacion'] + ' ' +
+            'precio: ' + data['precio']
+        ))
+        listView.appendChild(listonlyItem)
+        document.querySelector('#lista').appendChild(listView)
+
+    }
 }
 
 function cargaDatos(data, lista) {
     if (lista == 'experiencias') {
+        //primer elemento Elige una experiencia
+        let optionItem = document.createElement('OPTION');
+        optionItem.setAttribute('selected', true);
+        optionItem.setAttribute('hidden', true);
+        let textoptionItem = document.createTextNode('Elige una experiencia');
+        optionItem.appendChild(textoptionItem);
+        document.querySelector('#selectexp').appendChild(optionItem);
+
+
         for (var i = 0; i < data.length; i++) {
             let optionItem = document.createElement('OPTION');
             optionItem.setAttribute("value", data[i]['id']);
@@ -225,11 +234,10 @@ function cargaDatos(data, lista) {
     }
 }
 
-function borrar() {   
+function borrar() {
     let orderedList = document.querySelector('#orderedList');
-    if (orderedList){
+    if (orderedList) {
         orderedList.remove();
         //console.clear();    
-        console.log('borrado completado ');
     }
 }
