@@ -1,6 +1,25 @@
+/*
 
+1.- mirarse como hice las peticiones en esta pagina: sobre todo la de post+id en un formulario select
+https://github.com/josanescod/gestiona-escola/blob/master/js/estudiants_connectats.js mirar el metodo onchange y las funciones activaConsultaAlumnos
+y comboProfesores
+https://github.com/josanescod/gestiona-escola
+
+
+2.- endpoint con peticion get+parametro 
+
+Endpoint: https://cors-anywhere.herokuapp.com/https://welcomcity.herokuapp.com/test/experiencias/1
+
+3.- ver como crear una funcion con un parametro opcional listar (b,param)
+https://www.geeksforgeeks.org/how-to-declare-the-optional-function-parameters-in-javascript/#:~:text=To%20declare%20optional%20function%20parameters,end%20on%20the%20parameter%20list.
+
+
+*/
 const buttons = ['usuarios', 'comentarios', 'emails', 'experiencias', 'fotos', 'hoteles', 'ofertas', 'perfiles',
     'roles', 'servicios', 'tipos'];
+
+const show = 'mostrar'
+const load = 'cargar'
 
 window.onload = () => {
 
@@ -9,13 +28,14 @@ window.onload = () => {
 }
 
 function loadButtons() {
+    console.log('cargando botones')
     //botones peticiones
     for (let b of buttons) {
         let button = document.querySelector('#' + b);
         button.addEventListener('click', () => {
 
             console.log(`mostrar ${b}`)
-            listar(b);
+            listar(b, show);
             borrar();
 
 
@@ -28,14 +48,40 @@ function loadButtons() {
         console.clear();
         console.log('borrado completado ');
         document.querySelector('div > ol').remove();
+    })
 
+    //selector experiencias
+    let selectexp = document.querySelector('#selectexp');
+    //primero una peticion a experiencias para cargar el selector con los datos
+    listar('experiencias', load);
+    // crear el evento onchange 
+        selectexp.addEventListener('change', () => {
+        let svalue = selectexp.value;
+
+        console.log('accionando selector',svalue)
+        listar('experiencias', show,svalue);//la funcion listado para aprovecharla crear otro parametro 'load/show'
+        //borrar()
 
     })
+    //cargar los datos
 }
 
-function listar(lista) {
 
-    let url = `https://cors-anywhere.herokuapp.com/https://welcomcity.herokuapp.com/test/${lista}`
+/* Modificar esta funcion para añadir un parametro opcional que sera el id para hacer peticiones por id 
+https://www.geeksforgeeks.org/how-to-declare-the-optional-function-parameters-in-javascript/#:~:text=To%20declare%20optional%20function%20parameters,end%20on%20the%20parameter%20list.
+*/
+function listar(lista, action, param = 0) {
+
+    if (param == 0) {
+        var url = `https://cors-anywhere.herokuapp.com/https://welcomcity.herokuapp.com/test/${lista}`
+        console.log(url)
+    }else{
+        var url = `https://cors-anywhere.herokuapp.com/https://welcomcity.herokuapp.com/test/${lista}/${param}`
+        console.log(url)
+    }
+
+
+    
     let request = new Request(url, {
         method: 'GET',
     })
@@ -50,7 +96,15 @@ function listar(lista) {
                 }
                 // respuesta peticion
                 response.json().then(function (data) {
-                    muestraDatos(data, lista);
+                    if (action == show) {
+                        console.log('show')
+                        muestraDatos(data, lista);
+
+                    } else {
+                        console.log('load')
+                        cargaDatos(data, lista);
+                    }
+
                 });
             }
         )
@@ -185,6 +239,23 @@ function muestraDatos(data, lista) {
     }
 
     document.querySelector('#lista').appendChild(listView)
+
+}
+
+function cargaDatos(data, lista) {
+    console.log('cargando ' + lista)
+    console.log(data)
+    if (lista == 'experiencias') {
+        for (var i = 0; i < data.length; i++) {
+            let optionItem = document.createElement('OPTION');
+            optionItem.setAttribute("value", data[i]['id']);
+            let textoptionItem = document.createTextNode(data[i]['nombre']);
+            optionItem.appendChild(textoptionItem);
+            document.querySelector('#selectexp').appendChild(optionItem);
+
+        }
+    }
+
 
 }
 
