@@ -22,7 +22,7 @@ button {
     color: white;
 }
 
-#usuarios, #comentarios, #emails, #experiencias, #fotos, #hoteles, #ofertas, #perfiles, #roles, #servicios, #tipos {
+#usuarios, #comentarios, #emails, #experiencias, #fotos, #hoteles, #ofertas, #perfiles, #roles, #servicios, #tipos, #imagenes {
     background-color: #0d1f22;
     color: white;
 }
@@ -39,4 +39,9 @@ button {
 ol {
     padding-top: 5px;
     padding-bottom: 5px;
+}
+
+img{
+    height:100px;
+    width: 100px;
 }

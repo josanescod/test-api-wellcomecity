@@ -1,5 +1,5 @@
 const buttons = ['usuarios', 'comentarios', 'emails', 'experiencias', 'fotos', 'hoteles', 'ofertas', 'perfiles',
-    'roles', 'servicios', 'tipos'];
+    'roles', 'servicios', 'tipos', 'imagenes'];
 
 const show = 'mostrar'
 const load = 'cargar'
@@ -12,13 +12,20 @@ function loadButtons() {
     //botones peticiones
     for (let b of buttons) {
         let button = document.querySelector('#' + b);
-        button.addEventListener('click', () => {
-            console.log(`mostrar ${b}`)
-            listar(b, show);
-            borrar();
+        if (button) {
+            button.addEventListener('click', () => {
+                console.log(`mostrar ${b}`)
+                if (b == 'imagenes') {
+
+                    mostrarImagenes();
+                } else {
+                    listar(b, show);
+                    borrar();
+                }
 
 
-        })
+            })
+        }
     }
     //boton de borrar
     let borrarLista = document.querySelector('#borrar');
@@ -241,3 +248,51 @@ function borrar() {
         //console.clear();    
     }
 }
+
+
+function mostrarImagenes() {
+    var url = `https://cors-anywhere.herokuapp.com/https://picsum.photos/v2/list?page=2&limit=5`
+    
+    console.log(url)
+    let request = new Request(url, {
+        method: 'GET',
+    })
+    //llamada a la api 
+    fetch(request)
+        .then(
+            function (response) {
+                if (response.status !== 200) {
+                    console.log('Ha habido algun problema. Status Code: ' +
+                        response.status);
+                    return;
+                }
+                // respuesta peticion
+                response.json().then(function (data) {
+                    console.log(data)
+                    let listView = document.createElement('ol');
+                    listView.setAttribute('id', 'orderedList');
+                    for (let d in data) {
+                        let listViewItem = document.createElement('li');
+                        listViewItem.style.paddingLeft='40%';
+                        let image = document.createElement('IMG');
+                        image.style.width = '100px';
+                        image.style.height = '75px';
+                        
+                        image.src = `${data[d]['download_url']}`
+                        listViewItem.appendChild(image);
+                        
+                        
+                        
+                            listView.appendChild(listViewItem)
+                    }
+                    document.querySelector('#lista').appendChild(listView)
+                    
+
+                });
+            }
+        )
+        .catch(function (err) {
+            console.log('Fetch Error :-S', err);
+        });
+}
+
