@@ -5,6 +5,7 @@ const buttons = ['usuarios', 'comentarios', 'emails', 'experiencias', 'fotos', '
 
 const show = 'mostrar'
 const load = 'cargar'
+const ArrayImgExp = []
 
 window.onload = () => {
     console.log(initmodulo)
@@ -309,7 +310,7 @@ function mostrarImagenes() {
 4.- imprimir array
 */
 function mostrarImgExp() {
-    const ArrayImgExp = []
+    
     var url = `https://cors-anywhere.herokuapp.com/https://welcomcity.herokuapp.com/test/experiencias`
     let request = new Request(url, {
         method: 'GET',
