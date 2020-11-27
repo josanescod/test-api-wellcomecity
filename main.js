@@ -1,7 +1,7 @@
 import { initmodulo } from './test01.js';
 
 const buttons = ['usuarios', 'comentarios', 'emails', 'experiencias', 'fotos', 'hoteles', 'ofertas', 'perfiles',
-    'roles', 'servicios', 'tipos', 'imagenes','imgexp'];
+    'roles', 'servicios', 'tipos', 'imagenes', 'imgexp'];
 
 const show = 'mostrar'
 const load = 'cargar'
@@ -20,10 +20,14 @@ function loadButtons() {
                 console.log(`mostrar ${b}`)
                 if (b == 'imagenes') {
                     mostrarImagenes();
-                }else if (b== 'imgexp') {
-                    mostrarImgExp();
+                    borrar();
+                } else if (b == 'imgexp') {
 
-                }                 
+                    mostrarImgExp();
+                    borrar();
+
+
+                }
                 else {
                     listar(b, show);
                     borrar();
@@ -304,8 +308,8 @@ function mostrarImagenes() {
 3.- crear array imgexp
 4.- imprimir array
 */
-function mostrarImgExp(){  
-    const ArrayImgExp = []  
+function mostrarImgExp() {
+    const ArrayImgExp = []
     var url = `https://cors-anywhere.herokuapp.com/https://welcomcity.herokuapp.com/test/experiencias`
     let request = new Request(url, {
         method: 'GET',
@@ -321,9 +325,9 @@ function mostrarImgExp(){
                 }
                 // respuesta peticion
                 response.json().then(function (data) {
-                        for (let d in data){
-                            ArrayImgExp.push(data[d])
-                        }               
+                    for (let d in data) {
+                        ArrayImgExp.push(data[d])
+                    }
                 });
             }
         )
@@ -331,62 +335,62 @@ function mostrarImgExp(){
             console.log('Fetch Error :-S', err);
         });
 
-        var url = `https://cors-anywhere.herokuapp.com/https://picsum.photos/v2/list?page=2&limit=10`
-        let request2 = new Request(url, {
-            method: 'GET',
-        })
-        //llamada a la api 
-        fetch(request2)
-            .then(
-                function (response) {
-                    if (response.status !== 200) {
-                        console.log('Ha habido algun problema. Status Code: ' +
-                            response.status);
-                        return;
-                    }
-                    // respuesta peticion
-                    response.json().then(function (data) {
-                        for (let d in data){
-                                ArrayImgExp[d].download_url=data[d]['download_url']
-                            }
-                            console.log(ArrayImgExp)
-                            let listView = document.createElement('ol');
-                            listView.setAttribute('id', 'orderedList');
-                            
-                            for (let e in ArrayImgExp) {
-                                let listViewItem = document.createElement('li');
-                                listViewItem.style.paddingLeft = '2%';
-                                
-                                let title = document.createElement('H3');
-                                let text = document.createTextNode(ArrayImgExp[e]['nombre']
-                                )
-                                title.appendChild(text);
-                                listViewItem.appendChild(title);
-                                
-                                
-                                let image = document.createElement('IMG');
-                                image.style.width = '100px';
-                                image.style.height = '75px';
-                                image.src = `${ArrayImgExp[e]['download_url']}`
-                                listViewItem.appendChild(image);
-
-                                let description = document.createElement('P');
-                                let text2 = document.createTextNode(
-                                    ArrayImgExp[e]['descripcion']
-                                    );
-                                description.appendChild(text2)
-                                listViewItem.appendChild(description);
-                                
-                                
-                                
-                                listView.appendChild(listViewItem)
-                            }
-                            document.querySelector('#lista').appendChild(listView)
-
-                                });
+    var url = `https://cors-anywhere.herokuapp.com/https://picsum.photos/v2/list?page=2&limit=10`
+    let request2 = new Request(url, {
+        method: 'GET',
+    })
+    //llamada a la api 
+    fetch(request2)
+        .then(
+            function (response) {
+                if (response.status !== 200) {
+                    console.log('Ha habido algun problema. Status Code: ' +
+                        response.status);
+                    return;
                 }
-            )
-            .catch(function (err) {
-                console.log('Fetch Error :-S', err);
-            });
+                // respuesta peticion
+                response.json().then(function (data) {
+                    for (let d in data) {
+                        ArrayImgExp[d].download_url = data[d]['download_url']
+                    }
+                    console.log(ArrayImgExp)
+                    let listView = document.createElement('ol');
+                    listView.setAttribute('id', 'orderedList');
+
+                    for (let e in ArrayImgExp) {
+                        let listViewItem = document.createElement('li');
+                        //listViewItem.style.paddingLeft = '2%';
+
+                        let title = document.createElement('H3');
+                        let text = document.createTextNode(ArrayImgExp[e]['nombre']
+                        )
+                        title.appendChild(text);
+                        listViewItem.appendChild(title);
+
+
+                        let image = document.createElement('IMG');
+                        image.style.width = '100px';
+                        image.style.height = '75px';
+                        image.src = `${ArrayImgExp[e]['download_url']}`
+                        listViewItem.appendChild(image);
+
+                        let description = document.createElement('P');
+                        let text2 = document.createTextNode(
+                            ArrayImgExp[e]['descripcion']
+                        );
+                        description.appendChild(text2)
+                        listViewItem.appendChild(description);
+
+
+
+                        listView.appendChild(listViewItem)
+                    }
+                    document.querySelector('#lista').appendChild(listView)
+
+                });
+            }
+        )
+        .catch(function (err) {
+            console.log('Fetch Error :-S', err);
+        });
 }
