@@ -22,7 +22,7 @@ button {
     color: white;
 }
 
-#usuarios, #comentarios, #emails, #experiencias, #fotos, #hoteles, #ofertas, #perfiles, #roles, #servicios, #tipos, #imagenes {
+#usuarios, #comentarios, #emails, #experiencias, #fotos, #hoteles, #ofertas, #perfiles, #roles, #servicios, #tipos, #imagenes, #imgexp {
     background-color: #0d1f22;
     color: white;
 }

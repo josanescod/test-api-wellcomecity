@@ -1,8 +1,7 @@
 import { initmodulo } from './test01.js';
 
-
 const buttons = ['usuarios', 'comentarios', 'emails', 'experiencias', 'fotos', 'hoteles', 'ofertas', 'perfiles',
-    'roles', 'servicios', 'tipos', 'imagenes'];
+    'roles', 'servicios', 'tipos', 'imagenes','imgexp'];
 
 const show = 'mostrar'
 const load = 'cargar'
@@ -20,14 +19,15 @@ function loadButtons() {
             button.addEventListener('click', () => {
                 console.log(`mostrar ${b}`)
                 if (b == 'imagenes') {
-
                     mostrarImagenes();
-                } else {
+                }else if (b== 'imgexp') {
+                    mostrarImgExp();
+
+                }                 
+                else {
                     listar(b, show);
                     borrar();
                 }
-
-
             })
         }
     }
@@ -47,7 +47,6 @@ function loadButtons() {
         listar('experiencias', show, svalue);
         borrar()
     })
-
 }
 
 function listar(lista, action, param = 0) {
@@ -300,3 +299,66 @@ function mostrarImagenes() {
         });
 }
 
+
+
+
+/*
+1.- peticion servicios
+2.- peticion imagenes
+3.- crear array imgexp
+4.- imprimir array
+*/
+function mostrarImgExp(){  
+    const ArrayImgExp = []  
+    var url = `https://cors-anywhere.herokuapp.com/https://welcomcity.herokuapp.com/test/experiencias`
+    let request = new Request(url, {
+        method: 'GET',
+    })
+    //llamada a la api 
+    fetch(request)
+        .then(
+            function (response) {
+                if (response.status !== 200) {
+                    console.log('Ha habido algun problema. Status Code: ' +
+                        response.status);
+                    return;
+                }
+                // respuesta peticion
+                response.json().then(function (data) {
+                        for (let d in data){
+                            ArrayImgExp.push(data[d])
+                        }               
+                });
+            }
+        )
+        .catch(function (err) {
+            console.log('Fetch Error :-S', err);
+        });
+
+        var url = `https://cors-anywhere.herokuapp.com/https://picsum.photos/v2/list?page=2&limit=10`
+        let request2 = new Request(url, {
+            method: 'GET',
+        })
+        //llamada a la api 
+        fetch(request2)
+            .then(
+                function (response) {
+                    if (response.status !== 200) {
+                        console.log('Ha habido algun problema. Status Code: ' +
+                            response.status);
+                        return;
+                    }
+                    // respuesta peticion
+                    response.json().then(function (data) {
+                            
+                            for (let d in data){
+                                ArrayImgExp[d].download_url=data[d]['download_url']
+                            }
+                            console.log(ArrayImgExp)  
+                        });
+                }
+            )
+            .catch(function (err) {
+                console.log('Fetch Error :-S', err);
+            });
+}
