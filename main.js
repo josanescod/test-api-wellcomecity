@@ -1,3 +1,6 @@
+import { initmodulo } from './test01.js';
+
+
 const buttons = ['usuarios', 'comentarios', 'emails', 'experiencias', 'fotos', 'hoteles', 'ofertas', 'perfiles',
     'roles', 'servicios', 'tipos', 'imagenes'];
 
@@ -5,6 +8,7 @@ const show = 'mostrar'
 const load = 'cargar'
 
 window.onload = () => {
+    console.log(initmodulo)
     loadButtons();
 }
 
@@ -100,7 +104,7 @@ function muestraDatos(data, lista, param = 0) {
     } else {
         let listView = document.createElement('ol');
         listView.setAttribute('id', 'orderedList');
-        for (d in data) {
+        for (let d in data) {
             let listViewItem = document.createElement('li');
             if (lista == 'usuarios') {
                 listViewItem.appendChild(document.createTextNode(
@@ -252,7 +256,7 @@ function borrar() {
 
 function mostrarImagenes() {
     var url = `https://cors-anywhere.herokuapp.com/https://picsum.photos/v2/list?page=2&limit=5`
-    
+
     console.log(url)
     let request = new Request(url, {
         method: 'GET',
@@ -273,20 +277,20 @@ function mostrarImagenes() {
                     listView.setAttribute('id', 'orderedList');
                     for (let d in data) {
                         let listViewItem = document.createElement('li');
-                        listViewItem.style.paddingLeft='40%';
+                        listViewItem.style.paddingLeft = '40%';
                         let image = document.createElement('IMG');
                         image.style.width = '100px';
                         image.style.height = '75px';
-                        
+
                         image.src = `${data[d]['download_url']}`
                         listViewItem.appendChild(image);
-                        
-                        
-                        
-                            listView.appendChild(listViewItem)
+
+
+
+                        listView.appendChild(listViewItem)
                     }
                     document.querySelector('#lista').appendChild(listView)
-                    
+
 
                 });
             }
