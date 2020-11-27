@@ -280,12 +280,8 @@ function mostrarImagenes() {
                         let image = document.createElement('IMG');
                         image.style.width = '100px';
                         image.style.height = '75px';
-
                         image.src = `${data[d]['download_url']}`
                         listViewItem.appendChild(image);
-
-
-
                         listView.appendChild(listViewItem)
                     }
                     document.querySelector('#lista').appendChild(listView)
@@ -350,12 +346,44 @@ function mostrarImgExp(){
                     }
                     // respuesta peticion
                     response.json().then(function (data) {
-                            
-                            for (let d in data){
+                        for (let d in data){
                                 ArrayImgExp[d].download_url=data[d]['download_url']
                             }
-                            console.log(ArrayImgExp)  
-                        });
+                            console.log(ArrayImgExp)
+                            let listView = document.createElement('ol');
+                            listView.setAttribute('id', 'orderedList');
+                            
+                            for (let e in ArrayImgExp) {
+                                let listViewItem = document.createElement('li');
+                                listViewItem.style.paddingLeft = '2%';
+                                
+                                let title = document.createElement('H3');
+                                let text = document.createTextNode(ArrayImgExp[e]['nombre']
+                                )
+                                title.appendChild(text);
+                                listViewItem.appendChild(title);
+                                
+                                
+                                let image = document.createElement('IMG');
+                                image.style.width = '100px';
+                                image.style.height = '75px';
+                                image.src = `${ArrayImgExp[e]['download_url']}`
+                                listViewItem.appendChild(image);
+
+                                let description = document.createElement('P');
+                                let text2 = document.createTextNode(
+                                    ArrayImgExp[e]['descripcion']
+                                    );
+                                description.appendChild(text2)
+                                listViewItem.appendChild(description);
+                                
+                                
+                                
+                                listView.appendChild(listViewItem)
+                            }
+                            document.querySelector('#lista').appendChild(listView)
+
+                                });
                 }
             )
             .catch(function (err) {
