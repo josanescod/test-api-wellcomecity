@@ -140,6 +140,14 @@ function muestraDatos(data, lista, param = 0) {
                     'puntuacion: ' + data[d]['puntuacion'] + ' ' +
                     'precio: ' + data[d]['precio']
                 ))
+                console.log ('TEST==>',data[d]['imagenes'][0]['url'])
+               let image = document.createElement('IMG');
+                        image.style.width = '100px';
+                        image.style.height = '75px';
+                        image.src = `${data[d]['imagenes'][0]['url']}`
+                        
+                        listViewItem.appendChild(image);
+
                 console.log(listViewItem);
 
             }
