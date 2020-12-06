@@ -1,6 +1,6 @@
-import { initmodulo } from './test01.js';
-
-const buttons = ['usuarios', 'comentarios', 'emails', 'experiencias', 'fotos', 'hoteles', 'ofertas', 'perfiles',
+//import { initmodulo,saluda,borrar } from './services01.js';
+import * as services from './services.js';
+const buttons = ['usuarios', 'comentarios', 'experiencias', 'hoteles', 'ofertas', 'perfiles',
     'roles', 'servicios', 'tipos', 'imagenes', 'imgexp'];
 
 const show = 'mostrar'
@@ -8,7 +8,8 @@ const load = 'cargar'
 const ArrayImgExp = []
 
 window.onload = () => {
-    console.log(initmodulo)
+    console.log(services.initmodulo)
+    services.saluda();
     loadButtons();
 }
 
@@ -21,17 +22,17 @@ function loadButtons() {
                 console.log(`mostrar ${b}`)
                 if (b == 'imagenes') {
                     mostrarImagenes();
-                    borrar();
+                    services.borrar();
                 } else if (b == 'imgexp') {
 
                     mostrarImgExp();
-                    borrar();
+                    services.borrar();
 
 
                 }
                 else {
                     listar(b, show);
-                    borrar();
+                    services.borrar();
                 }
             })
         }
@@ -39,7 +40,7 @@ function loadButtons() {
     //boton de borrar
     let borrarLista = document.querySelector('#borrar');
     borrarLista.addEventListener('click', () => {
-        borrar();
+        services.borrar();
     })
     //selector experiencias
     let selectexp = document.querySelector('#selectexp');
@@ -50,7 +51,7 @@ function loadButtons() {
         let svalue = selectexp.value;
         console.log(`mostrar experiencia ${svalue}`)
         listar('experiencias', show, svalue);
-        borrar()
+        services.borrar()
     })
 }
 
@@ -140,13 +141,13 @@ function muestraDatos(data, lista, param = 0) {
                     'puntuacion: ' + data[d]['puntuacion'] + ' ' +
                     'precio: ' + data[d]['precio']
                 ))
-                console.log ('TEST==>',data[d]['imagenes'][0]['url'])
-               let image = document.createElement('IMG');
-                        image.style.width = '100px';
-                        image.style.height = '75px';
-                        image.src = `${data[d]['imagenes'][0]['url']}`
-                        
-                        listViewItem.appendChild(image);
+                console.log('services==>', data[d]['imagenes'][0]['url'])
+                let image = document.createElement('IMG');
+                image.style.width = '100px';
+                image.style.height = '75px';
+                image.src = `${data[d]['imagenes'][0]['url']}`
+
+                listViewItem.appendChild(image);
 
                 console.log(listViewItem);
 
@@ -257,13 +258,13 @@ function cargaDatos(data, lista) {
     }
 }
 
-function borrar() {
+/*function services.borrar() {
     let orderedList = document.querySelector('#orderedList');
     if (orderedList) {
         orderedList.remove();
         //console.clear();    
     }
-}
+}*/
 
 
 function mostrarImagenes() {
@@ -318,7 +319,7 @@ function mostrarImagenes() {
 4.- imprimir array
 */
 function mostrarImgExp() {
-    
+
     var url = `https://cors-anywhere.herokuapp.com/https://welcomcity.herokuapp.com/test/experiencias`
     let request = new Request(url, {
         method: 'GET',
